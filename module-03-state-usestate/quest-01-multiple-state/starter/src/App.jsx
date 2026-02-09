@@ -2,29 +2,38 @@ import { useState } from "react";
 import "./App.css";
 
 function App() {
-  // TODO: Add state for experience points (XP)
-  // const [xp, setXp] = useState(0);
+  const [magicLevel, setMagicLevel] = useState(20);
+  const [energy, setEnergy] = useState(100);
+  const [mana, setMana] = useState(80);
 
-  // TODO: Add state for level (calculated from XP)
+  const handleTrain = () => {
+    setMagicLevel(magicLevel + 5);
+    setEnergy(energy - 20);
+  };
 
-  // TODO: Add state for training activity
+  const handleRest = () => {
+    if (energy < 100) {
+      setEnergy(energy + 30);
+    }
+  };
 
-  // TODO: Create a function to handle training
-  // Each training session should add XP
-  // Level up when XP reaches certain thresholds
+  const handleCastSpell = () => {
+    setMana(mana - 15);
+    setMagicLevel(magicLevel + 2);
+  };
 
   return (
     <div>
-      <h1>Quest 1: Training System</h1>
-      <p>Build an interactive wizard training system with state!</p>
-
+      <h1>Olivia Buckley's Training</h1>
       <div className="training-container">
-        {/* TODO: Display current level and XP */}
-
-        {/* TODO: Add training buttons */}
-        {/* Example: <button onClick={handleTrain}>Train (+10 XP)</button> */}
-
-        {/* TODO: Show progress bar or visual indicator */}
+        <p>Level: {magicLevel}</p>
+        <p>Energy: {energy}</p>
+        <p>Mana: {mana}</p>
+        <div>
+          <button onClick={handleTrain}>Train</button>
+          <button onClick={handleRest}>Rest</button>
+          <button onClick={handleCastSpell}>Cast Spell</button>
+        </div>
       </div>
     </div>
   );
