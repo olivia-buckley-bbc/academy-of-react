@@ -22,14 +22,14 @@ const wizard = {
 //     ...
 //   </div>
 
-function StudentCard({ name, house, magicLevel, speciality }) {
+function StudentCard({ name, house, level, speciality }) {
   return (
     <div className="wizard-card">
       <h2>{name}</h2>
       <span className="wizard-info">{house}</span>
       <div className="wizard-info">
         <span className="wizard-info">Magic Level:</span>
-        <span className="wizard-info">{magicLevel}</span>
+        <span className="wizard-info">{level}</span>
       </div>
       <div className="wizard-info">
         <span className="wizard-info">Speciality:</span>

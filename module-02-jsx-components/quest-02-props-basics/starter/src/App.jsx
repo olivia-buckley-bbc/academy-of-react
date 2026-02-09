@@ -10,18 +10,48 @@ const wizards = [
 // TODO: Create a WizardCard component that accepts props: name, house, level
 // function WizardCard({ name, house, level }) { ... }
 
+function WizardCard({ name, house, level }) {
+  return (
+    <div className="wizard-card">
+      <span className="wizard-name">
+        <h2>{name}</h2>
+      </span>
+      <span className="wizard-info">{house}</span>
+      <div className="wizard-info">
+        <span className="wizard-info">Level:</span>
+        <span className="wizard-info">{level}</span>
+      </div>
+    </div>
+  );
+}
+
 // TODO: Create a Header component that accepts props: title, subtitle
 // function Header({ title, subtitle }) { ... }
+
+function Header({ title, subtitle }) {
+  return (
+    <div className="header">
+      <h1>{title}</h1>
+      <h2>{subtitle}</h2>
+    </div>
+  );
+}
 
 function App() {
   return (
     <div className="app">
-      {/* TODO: Use your Header component here */}
-      <h1>Quest 2: Props Basics</h1>
+      <Header title="Wizard School" subtitle="Pupil List" />
 
       {/* TODO: Map over wizards and render a WizardCard for each */}
       <div className="wizard-list">
-        <p>Create WizardCard components for each wizard!</p>
+        {wizards.map((wizard) => (
+          <WizardCard
+            key={wizard.id}
+            name={wizard.name}
+            house={wizard.house}
+            level={wizard.level}
+          />
+        ))}
       </div>
     </div>
   );
