@@ -3,7 +3,7 @@ import "./App.css";
 
 function App() {
   // TODO: Add state for selected ingredients (array)
-  // const [ingredients, setIngredients] = useState([]);
+  const [selectedIngredients, setSelectedIngredients] = useState([]);
 
   // TODO: Add state for brewing status
   // const [isbrewing, setIsBrewing] = useState(false);
@@ -12,10 +12,11 @@ function App() {
 
   // Available ingredients
   const availableIngredients = [
-    { id: 1, name: "Dragon Scale", effect: "strength" },
-    { id: 2, name: "Moonflower", effect: "wisdom" },
-    { id: 3, name: "Phoenix Feather", effect: "vitality" },
-    { id: 4, name: "Shadow Essence", effect: "stealth" },
+    { id: 1, name: "Dragon Scale", effect: "strength", brewTime: 1 },
+    { id: 2, name: "Moonflower", effect: "wisdom", brewTime: 3 },
+    { id: 3, name: "Phoenix Feather", effect: "vitality", brewTime: 5 },
+    { id: 4, name: "Shadow Essence", effect: "stealth", brewTime: 1 },
+    { id: 5, name: "Shadow Herb", effect: "courage", brewTime: 2 },
   ];
 
   // TODO: Create function to add ingredient
@@ -35,6 +36,18 @@ function App() {
         <div className="ingredients-panel">
           <h2>Available Ingredients</h2>
           {/* TODO: Display available ingredients with "Add" buttons */}
+          <div>
+            <ul>
+              {availableIngredients.map((availableIngredient, index) => (
+                <li key={index}>
+                  {availableIngredient.name +
+                    " - brew time: " +
+                    availableIngredient.brewTime +
+                    "mins"}
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
 
         <div className="cauldron">
