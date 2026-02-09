@@ -43,6 +43,24 @@ const potions = [
 // TODO: Create a PotionCard component that displays potion info
 // function PotionCard({ name, potency, ingredients, price }) { ... }
 
+function PotionCard({ name, effect, ingredients, brewTime }) {
+  return (
+    <div>
+      <h2>{name}</h2>
+      <h3>{effect}</h3>
+      <div>
+        <ul>
+          {" "}
+          {ingredients.map((ingredient, index) => (
+            <li key={index}>{ingredient}</li>
+          ))}{" "}
+        </ul>
+        <span>Brew Time: {brewTime} minutes</span>
+      </div>
+    </div>
+  );
+}
+
 // TODO: Create an Ingredient component for the ingredients list
 // function Ingredient({ name }) { ... }
 
@@ -54,6 +72,16 @@ function App() {
 
       <div className="potion-grid">
         {/* TODO: Map over potions and render PotionCards */}
+
+        {potions.map((potion) => (
+          <PotionCard
+            key={potion.id}
+            name={potion.name}
+            effect={potion.effect}
+            ingredients={potion.ingredients}
+            brewTime={potion.brewTime}
+          />
+        ))}
       </div>
     </div>
   );
