@@ -30,9 +30,17 @@ function BattleDashboard({ data }) {
       <p>Round: {round}</p>
       {teams.map((team) => (
         <div key={team.id}>
-          <h2>{team.name}</h2>
+          <h2 className="text-teamName">{team.name}</h2>
           <p>Health: {team.health}%</p>
+          <div class="w-64 h-6 bg-gray-300 rounded-full overflow-hidden">
+            {" "}
+            <div class="h-full w-1/2 bg-gradient-to-r from-green-500 to-green-300"></div>
+          </div>
           <p>Mana: {team.mana}%</p>
+          <div class="w-64 h-6 bg-gray-300 rounded-full overflow-hidden">
+            {" "}
+            <div class="h-full w-1/2 bg-gradient-to-r from-blue-500 to-blue-300"></div>
+          </div>
           <ul>
             {team.members.map((member) => (
               <li key={member.name}>
