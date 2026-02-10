@@ -1,35 +1,47 @@
 import { useState } from "react";
 import "./App.css";
 
-// TODO: Create a Card component that uses children
-// - Accept a "variant" prop with default value "default"
-// - Wrap children in a div with className `card card-${variant}`
 function Card({ children, variant = "default" }) {
-  return null;
+  return <div className={`card card-${variant}`}>{children}</div>;
 }
 
-// TODO: Create a Section component
-// - Accept "title" and "children" props
-// - Render the title in an h2, then render children
 function Section({ title, children }) {
-  return null;
+  return (
+    <section className="section">
+      <h2 className="section-title">{title}</h2>
+      {children}
+    </section>
+  );
 }
 
-// TODO: Create a Modal component
-// - Accept props: isOpen, onClose, title, children
-// - Return null if not open
-// - Render an overlay, modal box with title and children
 function Modal({ isOpen, onClose, title, children }) {
-  return null;
+  if (!isOpen) return null;
+
+  return (
+    <div className="modal-overlay" onClick={onClose}>
+      <div className="modal" onClick={(e) => e.stopPropagation()}>
+        <div className="modal-header">
+          <h3>{title}</h3>
+          <button className="modal-close" onClick={onClose}>
+            ×
+          </button>
+        </div>
+        <div className="modal-body">{children}</div>
+      </div>
+    </div>
+  );
 }
 
-// TODO: Create a Layout component with multiple slots
-// - Accept props: header, sidebar, children
-// - Render header in a <header> tag
-// - Render sidebar in an <aside> tag
-// - Render children in a <main> tag
 function Layout({ header, sidebar, children }) {
-  return null;
+  return (
+    <div className="layout">
+      <header className="layout-header">{header}</header>
+      <div className="layout-body">
+        <aside className="layout-sidebar">{sidebar}</aside>
+        <main className="layout-main">{children}</main>
+      </div>
+    </div>
+  );
 }
 
 function App() {
@@ -37,24 +49,75 @@ function App() {
 
   return (
     <div>
-      {/* TODO: Use Layout component with header, sidebar, and main content */}
-
-      {/* Example of what you should build:
-      
       <Layout
         header={<h1>Academy Dashboard</h1>}
-        sidebar={<nav>Menu items...</nav>}
+        sidebar={
+          <nav>
+            <ul>
+              <li>Home</li>
+              <li>Student Hub</li>
+              <li>FAQs</li>
+            </ul>
+          </nav>
+        }
       >
-        Main content here using children
+        <Section title={"Welcome Back Wizard!"}>
+          <p>Your magical journey continues. Check your stats below.</p>
+        </Section>
+
+        <Section title="Your Cards">
+          <div className="card-grid">
+            <Card variant="primary">
+              <h3>Magic Level</h3>
+              <p className="stat-value">45</p>
+              <p>Intermediate Caster</p>
+            </Card>
+
+            <Card variant="secondary">
+              <h3>Health</h3>
+              <p className="stat-value">100</p>
+              <p>Fully Restored</p>
+            </Card>
+
+            <Card>
+              <h3>Mana</h3>
+              <p className="stat-value">80</p>
+              <div className="mana-bar">
+                <div className="mana-fill" style={{ width: "80%" }}></div>
+              </div>
+            </Card>
+          </div>
+        </Section>
+
+        <Section title="Recent Activity">
+          <Card>
+            <ul className="activity-list">
+              <li>Learned Fireball spell</li>
+              <li>Brewed healing potion</li>
+              <li>Completed Chapter 5</li>
+            </ul>
+          </Card>
+        </Section>
+        <button className="open-modal-btn" onClick={() => setShowModal(true)}>
+          {" "}
+          Cast a Spell
+        </button>
+        <Modal
+          isOpen={showModal}
+          onClose={() => {
+            setShowModal(false);
+          }}
+          title="Cast a Spell"
+        >
+          <p>Choose your spell wisely!</p>
+          <div className="spell-options">
+            <button className="spell-btn">Fireball</button>
+            <button className="spell-btn">Ice Shard</button>
+            <button className="spell-btn">Lightning</button>
+          </div>
+          <p className="spell-hint">Each spell costs 10 mana</p>
+        </Modal>
       </Layout>
-      
-      */}
-
-      {/* TODO: Inside the Layout, create Sections with Cards */}
-
-      {/* TODO: Add a Modal that opens with a button */}
-
-      <p>Replace this with your layout components!</p>
     </div>
   );
 }
