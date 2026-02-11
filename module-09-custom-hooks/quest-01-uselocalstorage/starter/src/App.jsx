@@ -1,31 +1,39 @@
 import { useState } from "react";
 import "./App.css";
 
-// TODO: Create the useLocalStorage custom hook
-// It should:
-// 1. Accept a key (string) and initialValue
-// 2. Initialize state from localStorage if available, otherwise use initialValue
-// 3. Return [storedValue, setValue] like useState
-// 4. When setValue is called, update both state AND localStorage
-//
-// function useLocalStorage(key, initialValue) {
-//   // Hint: Use useState with a lazy initializer to read from localStorage
-//   // Hint: The setValue function should write to localStorage
-//   // Hint: Use JSON.parse/JSON.stringify for serialization
-// }
+function useLocalStorage(key, initialValue) {
+  const [storedValue, setStoredValue] = useState(() => {
+    try {
+      const item = window.localStorage.getItem(key);
+      return item ? JSON.parse(item) : initialValue;
+    } catch (error) {
+      console.error(error);
+      return initialValue;
+    }
+  });
+
+  const setValue = (value) => {
+    try {
+      const valueToStore =
+        value instanceof Function ? value(storedValue) : value;
+      setStoredValue(valueToStore);
+      window.localStorage.setItem(key, JSON.stringify(valueToStore));
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  return [storedValue, setValue];
+}
 
 function App() {
-  // TODO: Replace useState with useLocalStorage
-  // const [profile, setProfile] = useLocalStorage('wizardProfile', {...})
-  // const [darkMode, setDarkMode] = useLocalStorage('darkMode', false)
-
-  const [profile, setProfile] = useState({
+  onst[(profile, setProfile)] = useLocalStorage("wizardProfile", {
     name: "Anonymous Wizard",
     house: "Liondudes",
     level: 1,
   });
 
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useLocalStorage("darkMode", false);
 
   const handleNameChange = (name) => {
     setProfile({ ...profile, name });
@@ -43,13 +51,12 @@ function App() {
     setProfile({ name: "Anonymous Wizard", house: "Liondudes", level: 1 });
     setDarkMode(false);
   };
-
   return (
     <div className={`app ${darkMode ? "dark" : ""}`}>
       <div className="header">
         <h1>Wizard Profile</h1>
         <button onClick={() => setDarkMode(!darkMode)} className="theme-btn">
-          {darkMode ? "Light" : "Dark"}
+          {darkMode ? "Light Mode" : "Dark Mode"}
         </button>
       </div>
 
